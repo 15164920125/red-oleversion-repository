@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ms.device.mapper.ApkInfoMapper">
+
+
+	<select id="selectLatestPublish" resultType="cn.ms.device.schema.ApkInfo">  
+	    SELECT apk1.* from ApkInfo apk1 join 
+	    (select sysCode,max(uploadTime) as uploadTime from ApkInfo where publishFlag='2' group by sysCode) as apk2
+	    on apk1.sysCode = apk2.sysCode and apk1.uploadTime = apk2.uploadTime order by apk1.uploadTime desc
+	</select> 
+	
+	<select id="selectHistoryPublish" resultType="cn.ms.device.schema.ApkInfo">  
+	    SELECT apk.* from ApkInfo apk where apk.id not in
+	    (SELECT apk1.id from ApkInfo apk1 join 
+	    (select sysCode,max(uploadTime) as uploadTime from ApkInfo where publishFlag='2' group by sysCode) as apk2
+	    on apk1.sysCode = apk2.sysCode and apk1.uploadTime = apk2.uploadTime) 
+	    and apk.publishFlag='2' order by apk.uploadTime desc
+	</select> 
+
+</mapper>
+

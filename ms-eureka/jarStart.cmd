@@ -1,0 +1,1 @@
+java -jar E:\EclipseWorkspace\workspace1\custom\ms-eureka\target\ms-eureka.jar

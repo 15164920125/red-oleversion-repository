@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>PICC 移动查勘定损管理系统</title>
+<!-- <link rel="stylesheet" type="text/css" href="css/easyui.css"> -->
+<script type="text/javascript" src="../js/jquery-1.10.2.js" />
+<script type="text/javascript">
+</script>
+</head>
+	
+<body>
+	
+	<div style="position: fixed;top: 17%; left: 19%; height: 400px; width: 900px; background: #b9d6e8;">
+		
+		<div class="content_l">
+			<div class="content_top">
+				<div class="top_m">移动查勘后台管理系统</div>
+			</div>
+			<div class="content_bottom">
+				<div class="bottom_t">
+					<div class="bottom_t_l">
+						管理员：
+					</div>
+					<div class="bottom_t_r">
+						<input type="text" id="login_username" name="username" placeholder="请输入管理员帐号">
+					</div>
+				</div>
+				<div class="bottom_m">
+					<div class="bottom_m_l">
+						密码：
+					</div>
+					<div class="bottom_t_r">
+						<input type="password" name="pwd" id="login_pwd" placeholder="请输入密码">
+					</div>
+				</div>
+				<div class="bottom_b">
+					<input type="button" id="login_submit" value="登录"  onclick="login()"/>
+					<input type="button" id="login_reset" value="重置" style="margin-left: 30px;" />
+				</div>
+			</div>
+		</div>
+	</div>
+	
+		<script type="text/javascript">
+		//页面初始化
+		$(function() {
+			 
+		});
+		
+		/* 获取url中的参数值  */
+		function getUrlParam(){
+			  var url = window.location.search;
+			  var urlResult = [];
+			  var param = url.substr(1).split("&");
+			  for (var i = 0; i < param.length; i++) {
+				  var paramArray=param[i].split("=");
+				  //中文解码
+			      urlResult[i] = decodeURI(paramArray[1]);
+			  }
+			  return urlResult;
+		}
+		
+		function getUrlPath()
+		　　{
+		　　　　var url = document.location.toString();
+		　　　　var arrUrl = url.split("//");
+
+		　　　　var start = arrUrl[1].indexOf("/");
+		　　　　var relUrl = arrUrl[1].substring(0,start+1);
+			  relUrl="http://"+relUrl;
+		　　　　return relUrl;
+		　　}
+		var path="http://192.168.31.77:8081/";
+		//path=getUrlPath();
+		path="http://10.10.1.119:8081/";
+		function login()
+		{
+			 var urlParam =getUrlParam();
+			 var account = $('#login_username').val(); 
+			 account=urlParam[1];
+			 var password = $('#login_pwd').val();
+			 $.ajax({  
+		         /* type:'get',      
+		         dataType:'jsonp',   */
+		         url:path+'/mcpabc/UserAction/login',  
+		         data:{account:account,pwd:password},  
+		         cache:false,  
+		         success:function(result){
+		  	       		if (result.state == 200) {
+			  	       		alert(result.data)
+
+						} else {
+			  	       		alert(result.msg)
+
+						}
+		         }  
+	     	});
+			
+		}
+		
+	</script>
+</body>
+
+
+</html>

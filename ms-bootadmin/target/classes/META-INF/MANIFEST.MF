@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: ms-bootadmin
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: ASUS
+Implementation-Vendor-Id: com.anxin.core
+Build-Jdk: 1.8.0_102
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/ms-bootadmin
+Created-By: Maven Integration for Eclipse
+

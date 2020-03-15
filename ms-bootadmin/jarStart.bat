@@ -1,0 +1,1 @@
+java -jar E:\EclipseWorkspace\workspace1\custom\ms-bootadmin\target\ms-bootadmin.jar
